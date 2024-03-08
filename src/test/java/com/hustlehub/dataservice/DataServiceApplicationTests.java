@@ -1,4 +1,4 @@
-package com.mci.dataservice;
+package com.hustlehub.dataservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
