@@ -1,0 +1,17 @@
+package com.hustlehub.dataservice.dto;
+
+import com.hustlehub.dataservice.entity.DepositStatus;
+import com.hustlehub.dataservice.entity.PaymentType;
+import lombok.Data;
+
+@Data
+public class Deposit {
+    private String country;
+    private String currency;
+    private String amount;
+    private DepositStatus status;
+    private PaymentType paymentType;
+    private String approvedBy;
+    private String createdDate;
+    private String updatedDate;
+}
