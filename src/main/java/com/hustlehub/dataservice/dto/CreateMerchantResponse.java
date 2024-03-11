@@ -1,0 +1,19 @@
+package com.hustlehub.dataservice.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude
+public class CreateMerchantResponse {
+    private UUID id;
+    private  String userName;
+
+}
