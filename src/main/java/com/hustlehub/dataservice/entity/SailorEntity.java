@@ -1,5 +1,6 @@
 package com.hustlehub.dataservice.entity;
 
+import com.hustlehub.dataservice.dto.Status;
 import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
 import lombok.*;
@@ -8,13 +9,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name="MERCHANT")
+@Table(name="SAILOR")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchantEntity {
+public class SailorEntity {
 
     @Id
     @Column(name = "ID")
@@ -25,7 +26,7 @@ public class MerchantEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=50, nullable=true)
-    private DepositStatus status;
+    private Status status;
 
     @Column(name="APPROVED_BY", length=50)
     private String approvedBy;

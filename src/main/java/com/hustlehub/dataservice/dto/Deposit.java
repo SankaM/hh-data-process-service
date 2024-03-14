@@ -7,7 +7,7 @@ public class Deposit {
     private String country;
     private String currency;
     private String amount;
-    private DepositStatus status;
+    private Status status;
     private PaymentType paymentType;
     private String approvedBy;
     private String createdDate;

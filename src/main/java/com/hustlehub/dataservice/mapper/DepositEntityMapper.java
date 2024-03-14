@@ -3,6 +3,7 @@ package com.hustlehub.dataservice.mapper;
 import com.hustlehub.dataservice.core.AbstractModelAdaptor;
 import com.hustlehub.dataservice.dto.Deposit;
 import com.hustlehub.dataservice.dto.DepositRequest;
+import com.hustlehub.dataservice.dto.Status;
 import com.hustlehub.dataservice.entity.DepositEntity;
 import com.hustlehub.dataservice.dto.PaymentType;
 import org.modelmapper.PropertyMap;
@@ -57,7 +58,7 @@ public class DepositEntityMapper extends AbstractModelAdaptor<DepositEntity, Dep
         BigDecimal amount = BigDecimal.valueOf(Long.parseLong(depositRequest.getAmount()));
         depositEntity.setAmount(amount);
         depositEntity.setCurrency(depositRequest.getCurrency());
-        depositEntity.setStatus(DepositStatus.PENDING);
+        depositEntity.setStatus(Status.PENDING);
         depositEntity.setCountry("SG");
         depositEntity.setCreatedDate(LocalDateTime.now());
         depositEntity.setUserId("dummy_user");

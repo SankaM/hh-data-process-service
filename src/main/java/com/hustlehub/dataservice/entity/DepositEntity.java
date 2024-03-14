@@ -1,6 +1,7 @@
 package com.hustlehub.dataservice.entity;
 
 import com.hustlehub.dataservice.dto.PaymentType;
+import com.hustlehub.dataservice.dto.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +33,7 @@ public class DepositEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=50, nullable=false)
-    private DepositStatus status;
+    private Status status;
 
     @Enumerated(EnumType.STRING)
     @Column(name="PAYMENT_TYPE", length=50, nullable=false)

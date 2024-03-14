@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public interface SailorService {
 
-    CreateSailorResponse createMerchant(CreateMerchantRequest createMerchantRequest);
+    CreateSailorResponse createSailor(CreateMerchantRequest createMerchantRequest);
 
-    Sailor getMerchant(UUID id);
+    Sailor getSailor(UUID id);
 
 }

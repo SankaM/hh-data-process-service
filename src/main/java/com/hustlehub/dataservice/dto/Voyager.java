@@ -1,20 +1,20 @@
 package com.hustlehub.dataservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
 
+@Data
+@Builder
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude
-public class CreateSailorResponse {
+public class Voyager {
     private UUID id;
-    private  String userName;
-    private Status status;
-
+    private String userName;
+    private String ticker;
+    private List<Hustle> hustles;
+    private String approvedBy;
 }

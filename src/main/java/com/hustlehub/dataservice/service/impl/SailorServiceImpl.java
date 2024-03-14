@@ -1,8 +1,8 @@
 package com.hustlehub.dataservice.service.impl;
 
 import com.hustlehub.dataservice.dto.*;
-import com.hustlehub.dataservice.entity.MerchantEntity;
-import com.hustlehub.dataservice.repository.MerchantRepository;
+import com.hustlehub.dataservice.entity.SailorEntity;
+import com.hustlehub.dataservice.repository.SailorRepository;
 import com.hustlehub.dataservice.service.SailorService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -19,26 +19,26 @@ public class SailorServiceImpl implements SailorService {
     private static final Logger log = LoggerFactory.getLogger(SailorServiceImpl.class);
 
     @Autowired
-    private MerchantRepository merchantRepository;
+    private SailorRepository sailorRepository;
 
 
     @Transactional
     @Override
-    public CreateSailorResponse createMerchant(CreateMerchantRequest createMerchantRequest) {
-        MerchantEntity merchantEntity = MerchantEntity.builder()
+    public CreateSailorResponse createSailor(CreateMerchantRequest createMerchantRequest) {
+        SailorEntity sailorEntity = SailorEntity.builder()
                 .id(UUID.randomUUID())
                 .userId(createMerchantRequest.getUserName()).build();
-        merchantEntity = merchantRepository.save(merchantEntity);
+        sailorEntity = sailorRepository.save(sailorEntity);
         log.info("Created merchant in the system");
-        return CreateSailorResponse.builder().userName(merchantEntity.getUserId())
-                .id(merchantEntity.getId()).build();
+        return CreateSailorResponse.builder().userName(sailorEntity.getUserId())
+                .id(sailorEntity.getId()).build();
     }
 
     @Override
-    public Sailor getMerchant(UUID id){
-        MerchantEntity merchantEntity =  merchantRepository.findById(id);
+    public Sailor getSailor(UUID id){
+        SailorEntity sailorEntity =  sailorRepository.findById(id);
         return Sailor.builder()
-                .id(merchantEntity.getId()).userName(merchantEntity.getUserId()).build();
+                .id(sailorEntity.getId()).userName(sailorEntity.getUserId()).build();
     }
 
     private void validateDepositRequest(DepositRequest depositRequest) {

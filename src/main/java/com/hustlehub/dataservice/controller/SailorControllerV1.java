@@ -15,14 +15,14 @@ public class SailorControllerV1 {
     private SailorService sailorService;
 
 
-    @PostMapping("/merchant/create")
-    public CreateSailorResponse createMerchant(@RequestBody CreateMerchantRequest createMerchantRequest) {
-       return  sailorService.createMerchant(createMerchantRequest);
+    @PostMapping("/sailor/create")
+    public CreateSailorResponse createSailor(@RequestBody CreateMerchantRequest createMerchantRequest) {
+       return  sailorService.createSailor(createMerchantRequest);
     }
 
-    @GetMapping("/merchant/{id}")
-    public Sailor getMerchant(@PathVariable UUID id) {
-        return sailorService.getMerchant(id);
+    @GetMapping("/sailor/{id}")
+    public Sailor getSailor(@PathVariable UUID id) {
+        return sailorService.getSailor(id);
     }
 
 }

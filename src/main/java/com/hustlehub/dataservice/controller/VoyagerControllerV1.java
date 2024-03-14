@@ -1,9 +1,8 @@
 package com.hustlehub.dataservice.controller;
 
-import com.hustlehub.dataservice.dto.CreateMerchantRequest;
-import com.hustlehub.dataservice.dto.CreateSailorResponse;
-import com.hustlehub.dataservice.dto.Sailor;
+import com.hustlehub.dataservice.dto.*;
 import com.hustlehub.dataservice.service.SailorService;
+import com.hustlehub.dataservice.service.VoyagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,17 +13,17 @@ import java.util.UUID;
 public class VoyagerControllerV1 {
 
     @Autowired
-    private SailorService sailorService;
+    private VoyagerService voyagerService;
 
 
-    @PostMapping("/hustler/create")
-    public CreateSailorResponse onboardHustler(@RequestBody CreateMerchantRequest createMerchantRequest) {
-       return  sailorService.createMerchant(createMerchantRequest);
+    @PostMapping("/voyager/create")
+    public CreateVoyagerResponse onboardVoyager(@RequestBody CreateVoyagerRequest createMerchantRequest) {
+       return  voyagerService.createVoyager(createMerchantRequest);
     }
 
-    @GetMapping("/hustler/{id}")
-    public Sailor getHustler(@PathVariable UUID id) {
-        return sailorService.getMerchant(id);
+    @GetMapping("/voyager/{id}")
+    public Voyager getHustler(@PathVariable UUID id) {
+        return voyagerService.getVoyager(id);
     }
 
 }

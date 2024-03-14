@@ -19,12 +19,12 @@ public class HustleControllerV1 {
 
     @PostMapping("/hustle/create")
     public CreateSailorResponse createHustle(@RequestBody CreateMerchantRequest createMerchantRequest) {
-       return  sailorService.createMerchant(createMerchantRequest);
+       return  sailorService.createSailor(createMerchantRequest);
     }
 
     @GetMapping("/hustle/{id}")
     public Sailor getHustle(@PathVariable UUID id) {
-        return sailorService.getMerchant(id);
+        return sailorService.getSailor(id);
     }
 
 }
