@@ -1,9 +1,8 @@
 package com.hustlehub.dataservice.dto;
 
-import com.hustlehub.dataservice.entity.DepositStatus;
-import com.hustlehub.dataservice.entity.PaymentType;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -12,9 +11,10 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Merchant {
+public class Sailor {
     private UUID id;
     private String userName;
-    private DepositStatus status;
+    private String ticker;
+    private List<Hustle> hustles;
     private String approvedBy;
 }

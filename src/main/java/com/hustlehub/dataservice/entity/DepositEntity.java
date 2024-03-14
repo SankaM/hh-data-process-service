@@ -1,5 +1,6 @@
 package com.hustlehub.dataservice.entity;
 
+import com.hustlehub.dataservice.dto.PaymentType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,5 @@
 package com.hustlehub.dataservice.dto;
 
-import com.hustlehub.dataservice.entity.DepositStatus;
-import com.hustlehub.dataservice.entity.PaymentType;
 import lombok.Data;
 
 @Data

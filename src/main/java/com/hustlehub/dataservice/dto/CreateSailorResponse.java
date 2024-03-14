@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude
-public class CreateMerchantResponse {
+public class CreateSailorResponse {
     private UUID id;
     private  String userName;
 

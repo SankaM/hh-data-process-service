@@ -4,8 +4,7 @@ import com.hustlehub.dataservice.core.AbstractModelAdaptor;
 import com.hustlehub.dataservice.dto.Deposit;
 import com.hustlehub.dataservice.dto.DepositRequest;
 import com.hustlehub.dataservice.entity.DepositEntity;
-import com.hustlehub.dataservice.entity.DepositStatus;
-import com.hustlehub.dataservice.entity.PaymentType;
+import com.hustlehub.dataservice.dto.PaymentType;
 import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
