@@ -1,6 +1,7 @@
 package com.hustlehub.dataservice.service.impl;
 
 import com.hustlehub.dataservice.dto.*;
+import com.hustlehub.dataservice.entity.HustleEntity;
 import com.hustlehub.dataservice.entity.SailorEntity;
 import com.hustlehub.dataservice.repository.SailorRepository;
 import com.hustlehub.dataservice.service.SailorService;
@@ -44,5 +45,20 @@ public class SailorServiceImpl implements SailorService {
                 .tag(sailorEntity.getTag())
                 .userName(sailorEntity.getUserId())
                 .status(sailorEntity.getStatus()).build();
+    }
+
+    @Override
+    public Hustle createHustle(String sailorId, CreateHustleRequest createHustleRequest) {
+        HustleEntity hustleEntity = HustleEntity.builder()
+                .id(UUID.randomUUID())
+                .status(Status.INITIATED)
+                .name(createHustleRequest.getName())
+                .currency(createHustleRequest.getCurrency())
+                .valuation(createHustleRequest.getValuation())
+                .cardCount(createHustleRequest.getCardCount())
+                .cardValue(createHustleRequest.getCardValue())
+                .build();
+
+        return Hustle.builder().build();
     }
 }

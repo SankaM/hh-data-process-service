@@ -25,4 +25,9 @@ public class SailorControllerV1 {
         return sailorService.getSailor(id);
     }
 
+    @PostMapping("{id}/create/hustle")
+    public Hustle createHustle(@PathVariable("id") String sailorId, @RequestBody CreateHustleRequest createHustleRequest) {
+        return  sailorService.createHustle(sailorId, createHustleRequest);
+    }
+
 }

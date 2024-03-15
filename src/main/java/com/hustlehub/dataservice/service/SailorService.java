@@ -10,4 +10,6 @@ public interface SailorService {
 
     Sailor getSailor(UUID id);
 
+    Hustle createHustle(String sailorId, CreateHustleRequest createHustleRequest);
+
 }

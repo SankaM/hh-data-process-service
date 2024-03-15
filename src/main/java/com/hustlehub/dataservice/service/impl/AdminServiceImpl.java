@@ -1,9 +1,9 @@
 package com.hustlehub.dataservice.service.impl;
 
-import com.hustlehub.dataservice.dto.CreateSailorRequest;
-import com.hustlehub.dataservice.dto.Sailor;
-import com.hustlehub.dataservice.dto.Status;
+import com.hustlehub.dataservice.dto.*;
+import com.hustlehub.dataservice.entity.HustleEntity;
 import com.hustlehub.dataservice.entity.SailorEntity;
+import com.hustlehub.dataservice.repository.HustleRepository;
 import com.hustlehub.dataservice.repository.SailorRepository;
 import com.hustlehub.dataservice.service.AdminService;
 import com.hustlehub.dataservice.service.SailorService;
@@ -24,6 +24,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private SailorRepository sailorRepository;
 
+    @Autowired
+    private HustleRepository hustleRepository;
+
 
     @Transactional
     @Override
@@ -37,5 +40,19 @@ public class AdminServiceImpl implements AdminService {
         return Sailor.builder().userName(sailorEntity.getUserId())
                 .id(sailorEntity.getId()).tag(sailorEntity.getTag())
                 .status(sailorEntity.getStatus()).build();
+    }
+
+    @Transactional
+    @Override
+    public Hustle approveHustle(String sailorId, String hustleId) {
+        SailorEntity sailorEntity = sailorRepository.findById(UUID.fromString(sailorId));
+        HustleEntity hustleEntity = hustleRepository.findById(UUID.fromString(hustleId));
+
+        //verify sailor and hustle details and approve
+
+        hustleEntity.setStatus(Status.APPROVED);
+        hustleEntity.setApprovedBy("ADMIN");
+        hustleRepository.save(hustleEntity);
+        return Hustle.builder().id(hustleId).approvedBy("ADMIN").status(Status.APPROVED).build();
     }
 }

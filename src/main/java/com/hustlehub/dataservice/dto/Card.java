@@ -15,10 +15,6 @@ import java.util.UUID;
 public class Card {
     private UUID id;
     private String hustleId;
-    private String ownerId;
-    private Status status;
     private BigDecimal cardValue;
     private String currency;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

@@ -1,6 +1,8 @@
 package com.hustlehub.dataservice.controller;
 
+import com.hustlehub.dataservice.dto.CreateHustleRequest;
 import com.hustlehub.dataservice.dto.CreateSailorRequest;
+import com.hustlehub.dataservice.dto.Hustle;
 import com.hustlehub.dataservice.dto.Sailor;
 import com.hustlehub.dataservice.service.AdminService;
 import com.hustlehub.dataservice.service.SailorService;
@@ -21,5 +23,11 @@ public class AdminControllerV1 {
     public Sailor approveSailor(@PathVariable("id") String id) {
        return  adminService.approveSailor(id);
     }
+
+    @PutMapping("/sailor/{sailorId}/hustle/{hustleId}/approve")
+    public Hustle approveSailor(@PathVariable("sailorId") String sailorId, @PathVariable("hustleId") String hustleId) {
+        return  adminService.approveHustle(sailorId, hustleId);
+    }
+
 
 }

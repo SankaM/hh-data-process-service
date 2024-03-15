@@ -14,17 +14,23 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Hustle {
-    private UUID id;
+    private String id;
     private String name;
     private String description;
-    private String merchantId;
+    private String sailorId;
     private Status status;
-    private BigDecimal totalInvestment;
-    private Long cardCount;
-    private List<Card> cards;
+    private BigDecimal valuation;
     private String currency;
+    private Long cardCount;
+    private BigDecimal cardValue;
     private String approvedBy;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime expiredBy;
+    private Long tenure;
+    private String tenureUnit;
+    private String returnPeriod;
+    private String returnType;
+    private Long returnValue;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }
