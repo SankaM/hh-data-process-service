@@ -10,7 +10,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude
-public class CreateMerchantRequest {
+public class CreateSailorRequest {
 
     private String userName;
+    private String name;
+    private String sector;
+    private String tag;
 }

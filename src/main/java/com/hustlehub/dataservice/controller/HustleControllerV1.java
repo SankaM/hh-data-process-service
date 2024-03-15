@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/data")
+@RequestMapping("/v1/hustle")
 public class HustleControllerV1 {
 
     @Autowired

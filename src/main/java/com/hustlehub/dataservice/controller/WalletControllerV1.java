@@ -3,29 +3,29 @@ package com.hustlehub.dataservice.controller;
 import com.hustlehub.dataservice.dto.Deposit;
 import com.hustlehub.dataservice.dto.DepositRequest;
 import com.hustlehub.dataservice.dto.DepositResponse;
-import com.hustlehub.dataservice.service.DepositService;
+import com.hustlehub.dataservice.service.WalletService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/data")
-public class DepositControllerV1 {
+@RequestMapping("/v1/wallet")
+public class WalletControllerV1 {
 
-    private final DepositService depositService;
+    private final WalletService walletService;
 
-    public DepositControllerV1(DepositService depositService) {
-        this.depositService = depositService;
+    public WalletControllerV1(WalletService walletService) {
+        this.walletService = walletService;
     }
 
     @PostMapping("/deposit")
     public void saveDeposit(@RequestBody DepositRequest depositRequest) {
-        depositService.createDeposit(depositRequest);
+        walletService.createDeposit(depositRequest);
     }
 
-    @GetMapping("/deposit")
+    @GetMapping("/list")
     public DepositResponse viewDeposits() {
-        List<Deposit> depositList = depositService.loadAllDeposits();
+        List<Deposit> depositList = walletService.loadAllDeposits();
         DepositResponse response = new DepositResponse();
         response.setDeposits(depositList);
         return response;

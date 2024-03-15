@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/data")
+@RequestMapping("/v1/voyager")
 public class VoyagerControllerV1 {
 
     @Autowired
     private VoyagerService voyagerService;
 
 
-    @PostMapping("/voyager/create")
+    @PostMapping("/create")
     public CreateVoyagerResponse onboardVoyager(@RequestBody CreateVoyagerRequest createMerchantRequest) {
        return  voyagerService.createVoyager(createMerchantRequest);
     }
 
-    @GetMapping("/voyager/{id}")
+    @GetMapping("/{id}")
     public Voyager getHustler(@PathVariable UUID id) {
         return voyagerService.getVoyager(id);
     }

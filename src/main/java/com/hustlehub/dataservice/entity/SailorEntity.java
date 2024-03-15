@@ -24,6 +24,9 @@ public class SailorEntity {
     @Column(name="USER_ID", length=50, nullable=false)
     private String userId;
 
+    @Column(name="TAG", length=10, nullable=false)
+    private String tag;
+
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=50, nullable=true)
     private Status status;

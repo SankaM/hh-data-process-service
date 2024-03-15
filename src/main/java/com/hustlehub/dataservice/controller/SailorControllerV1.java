@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/data")
+@RequestMapping("/v1/sailor")
 public class SailorControllerV1 {
 
     @Autowired
     private SailorService sailorService;
 
 
-    @PostMapping("/sailor/create")
-    public CreateSailorResponse createSailor(@RequestBody CreateMerchantRequest createMerchantRequest) {
-       return  sailorService.createSailor(createMerchantRequest);
+    @PostMapping("/create")
+    public Sailor createSailor(@RequestBody CreateSailorRequest createSailorRequest) {
+       return  sailorService.createSailor(createSailorRequest);
     }
 
-    @GetMapping("/sailor/{id}")
+    @GetMapping("/{id}")
     public Sailor getSailor(@PathVariable UUID id) {
         return sailorService.getSailor(id);
     }

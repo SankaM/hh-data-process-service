@@ -24,29 +24,25 @@ public class SailorServiceImpl implements SailorService {
 
     @Transactional
     @Override
-    public CreateSailorResponse createSailor(CreateMerchantRequest createMerchantRequest) {
+    public Sailor createSailor(CreateSailorRequest createSailorRequest) {
         SailorEntity sailorEntity = SailorEntity.builder()
                 .id(UUID.randomUUID())
-                .userId(createMerchantRequest.getUserName()).build();
+                .tag(createSailorRequest.getTag())
+                .userId(createSailorRequest.getUserName()).build();
         sailorEntity = sailorRepository.save(sailorEntity);
-        log.info("Created merchant in the system");
-        return CreateSailorResponse.builder().userName(sailorEntity.getUserId())
-                .id(sailorEntity.getId()).build();
+        log.info("Created sailor in the system");
+        return Sailor.builder().userName(sailorEntity.getUserId())
+                .id(sailorEntity.getId()).tag(sailorEntity.getTag())
+                .status(Status.INITIATED).build();
     }
 
     @Override
     public Sailor getSailor(UUID id){
         SailorEntity sailorEntity =  sailorRepository.findById(id);
         return Sailor.builder()
-                .id(sailorEntity.getId()).userName(sailorEntity.getUserId()).build();
+                .id(sailorEntity.getId())
+                .tag(sailorEntity.getTag())
+                .userName(sailorEntity.getUserId())
+                .status(sailorEntity.getStatus()).build();
     }
-
-    private void validateDepositRequest(DepositRequest depositRequest) {
-        if (depositRequest == null || depositRequest.getAmount() == null
-                || depositRequest.getCurrency() == null) {
-            log.error("Invalid request");
-            throw new RuntimeException("Invalid Request");
-        }
-    }
-
 }

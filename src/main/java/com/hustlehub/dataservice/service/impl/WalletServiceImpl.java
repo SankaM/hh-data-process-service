@@ -5,7 +5,7 @@ import com.hustlehub.dataservice.dto.DepositRequest;
 import com.hustlehub.dataservice.entity.DepositEntity;
 import com.hustlehub.dataservice.mapper.DepositEntityMapper;
 import com.hustlehub.dataservice.repository.DepositRepository;
-import com.hustlehub.dataservice.service.DepositService;
+import com.hustlehub.dataservice.service.WalletService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,15 +15,15 @@ import java.util.List;
 
 
 @Service
-public class DepositServiceImpl implements DepositService {
+public class WalletServiceImpl implements WalletService {
 
-    private static final Logger log = LoggerFactory.getLogger(DepositServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(WalletServiceImpl.class);
 
     private final DepositRepository depositRepository;
 
     private final DepositEntityMapper depositEntityMapper;
 
-    public DepositServiceImpl(DepositRepository depositRepository, DepositEntityMapper depositEntityMapper) {
+    public WalletServiceImpl(DepositRepository depositRepository, DepositEntityMapper depositEntityMapper) {
         this.depositRepository = depositRepository;
         this.depositEntityMapper = depositEntityMapper;
     }
