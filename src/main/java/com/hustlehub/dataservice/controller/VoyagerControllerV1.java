@@ -17,13 +17,16 @@ public class VoyagerControllerV1 {
 
 
     @PostMapping("/create")
-    public CreateVoyagerResponse onboardVoyager(@RequestBody CreateVoyagerRequest createMerchantRequest) {
+    public Voyager onboardVoyager(@RequestBody CreateVoyagerRequest createMerchantRequest) {
        return  voyagerService.createVoyager(createMerchantRequest);
     }
 
     @GetMapping("/{id}")
-    public Voyager getHustler(@PathVariable UUID id) {
+    public Voyager getVoyager(@PathVariable String id) {
         return voyagerService.getVoyager(id);
     }
+
+
+
 
 }

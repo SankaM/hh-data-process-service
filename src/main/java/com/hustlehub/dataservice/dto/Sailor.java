@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Sailor {
-    private UUID id;
+    private String id;
     private String userName;
     private String tag;
     private List<Hustle> hustles;

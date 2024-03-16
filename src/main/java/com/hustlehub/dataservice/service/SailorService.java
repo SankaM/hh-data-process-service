@@ -8,7 +8,7 @@ public interface SailorService {
 
     Sailor createSailor(CreateSailorRequest createSailorRequest);
 
-    Sailor getSailor(UUID id);
+    Sailor getSailor(String id);
 
     Hustle createHustle(String sailorId, CreateHustleRequest createHustleRequest);
 

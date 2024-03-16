@@ -24,5 +24,6 @@ public class CreateHustleRequest {
     private String tenureUnit;
     private String returnPeriod;
     private String returnType;
-    private Long returnValue;
+    private BigDecimal returnValue;
+    private BigDecimal totalReturnPerCard;
 }

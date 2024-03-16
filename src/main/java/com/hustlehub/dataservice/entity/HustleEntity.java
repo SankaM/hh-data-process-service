@@ -4,6 +4,9 @@ import com.hustlehub.dataservice.dto.Status;
 import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,63 +19,55 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class HustleEntity {
 
     @Id
     @Column(name = "ID")
-    private UUID id;
+    private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=50, nullable=true)
     private Status status;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="NAME", length=30, nullable=true)
+    @Column(name="NAME", length=30)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="DESCRIPTION", length=100, nullable=true)
-    private Status description;
+    @Column(name="DESCRIPTION", length=100)
+    private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="SAILOR_ID", length=50, nullable=true)
-    private UUID sailorId;
+    @Column(name="SAILOR_ID", length=50)
+    private String sailorId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="VALUATION", nullable=true)
+    @Column(name="VALUATION")
     private BigDecimal valuation;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="CURRENCY", nullable=true)
+    @Column(name="CURRENCY")
     private String currency;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="CARD_COUNT", nullable=true)
+    @Column(name="CARD_COUNT")
     private Long cardCount;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="CARD_VALUE", nullable=true)
+    @Column(name="CARD_VALUE")
     private BigDecimal cardValue;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="TENURE", nullable=true)
+    @Column(name="TENURE")
     private Long tenure;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="TENURE_UNIT", nullable=true)
-    private Long tenureUnit;
+    @Column(name="TENURE_UNIT")
+    private String tenureUnit;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="RETURN_PERIOD", nullable=true)
+    @Column(name="RETURN_PERIOD")
     private String returnPeriod;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="RETURN_TYPE", nullable=true)
+    @Column(name="RETURN_TYPE")
     private String returnType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="RETURN_VALUE", nullable=true)
-    private Long returnValue;
+    @Column(name="RETURN_VALUE")
+    private BigDecimal returnValue;
+
+    @Column(name="TOTAL_RETURN_PER_CARD")
+    private BigDecimal totalReturnPerCard;
 
     @Timestamp
     @Column(name="START_DATE")
@@ -85,11 +80,13 @@ public class HustleEntity {
     @Column(name="APPROVED_BY", length=50)
     private String approvedBy;
 
-    @Column(name="CREATED_AT")
-    @Timestamp
-    private LocalDateTime createdDate;
+    @Column(name="CREATED_AT", nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-    @Timestamp
-    @Column(name="UPDATED_AT")
-    private LocalDateTime updatedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    @Column(name="UPDATED_AT", nullable = false)
+    private LocalDateTime updatedAt;
 }

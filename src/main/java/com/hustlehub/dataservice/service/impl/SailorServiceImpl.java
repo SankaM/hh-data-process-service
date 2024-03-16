@@ -4,6 +4,7 @@ import com.hustlehub.dataservice.dto.*;
 import com.hustlehub.dataservice.entity.HustleEntity;
 import com.hustlehub.dataservice.entity.SailorEntity;
 import com.hustlehub.dataservice.repository.SailorRepository;
+import com.hustlehub.dataservice.service.HustleService;
 import com.hustlehub.dataservice.service.SailorService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 
@@ -22,12 +24,15 @@ public class SailorServiceImpl implements SailorService {
     @Autowired
     private SailorRepository sailorRepository;
 
+    @Autowired
+    private HustleService hustleService;
+
 
     @Transactional
     @Override
     public Sailor createSailor(CreateSailorRequest createSailorRequest) {
         SailorEntity sailorEntity = SailorEntity.builder()
-                .id(UUID.randomUUID())
+                .id(UUID.randomUUID().toString())
                 .tag(createSailorRequest.getTag())
                 .userId(createSailorRequest.getUserName()).build();
         sailorEntity = sailorRepository.save(sailorEntity);
@@ -38,8 +43,8 @@ public class SailorServiceImpl implements SailorService {
     }
 
     @Override
-    public Sailor getSailor(UUID id){
-        SailorEntity sailorEntity =  sailorRepository.findById(id);
+    public Sailor getSailor(String id){
+        SailorEntity sailorEntity =  sailorRepository.findById(id).get();
         return Sailor.builder()
                 .id(sailorEntity.getId())
                 .tag(sailorEntity.getTag())
@@ -49,16 +54,16 @@ public class SailorServiceImpl implements SailorService {
 
     @Override
     public Hustle createHustle(String sailorId, CreateHustleRequest createHustleRequest) {
-        HustleEntity hustleEntity = HustleEntity.builder()
-                .id(UUID.randomUUID())
-                .status(Status.INITIATED)
-                .name(createHustleRequest.getName())
-                .currency(createHustleRequest.getCurrency())
-                .valuation(createHustleRequest.getValuation())
-                .cardCount(createHustleRequest.getCardCount())
-                .cardValue(createHustleRequest.getCardValue())
-                .build();
-
-        return Hustle.builder().build();
+        Sailor sailor = null;
+        try {
+             sailor = getSailor(sailorId);
+        }catch(NoSuchElementException ex ) {
+            throw new RuntimeException("SailorNotFound");
+        }
+        if(null != sailor) {
+            return  hustleService.createHustle(sailorId, createHustleRequest);
+        }else{
+            throw new RuntimeException("SailorNotFound");
+        }
     }
 }

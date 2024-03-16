@@ -1,5 +1,6 @@
 package com.hustlehub.dataservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Hustle {
     private String id;
     private String name;
@@ -30,7 +32,8 @@ public class Hustle {
     private String tenureUnit;
     private String returnPeriod;
     private String returnType;
-    private Long returnValue;
+    private BigDecimal returnValue;
+    private BigDecimal totalReturnPerCard;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 }

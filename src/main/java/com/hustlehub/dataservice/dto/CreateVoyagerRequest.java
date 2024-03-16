@@ -12,4 +12,5 @@ import lombok.*;
 public class CreateVoyagerRequest {
 
     private String userName;
+    private String name;
 }

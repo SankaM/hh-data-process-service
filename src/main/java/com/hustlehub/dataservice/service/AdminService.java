@@ -13,4 +13,7 @@ public interface AdminService {
 
     Hustle approveHustle(String sailorId, String hustleId);
 
+    void startApprovedHustles();
+
+
 }

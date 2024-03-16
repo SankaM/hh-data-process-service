@@ -19,10 +19,13 @@ public class VoyagerEntity {
 
     @Id
     @Column(name = "ID")
-    private UUID id;
+    private String id;
 
-    @Column(name="USER_ID", length=50, nullable=false)
-    private String userId;
+    @Column(name="USER_NAME", length=30, nullable=false)
+    private String userName;
+
+    @Column(name="NAME", length=50, nullable=false)
+    private String name;
 
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=50, nullable=true)

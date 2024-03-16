@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public interface VoyagerService {
 
-    CreateVoyagerResponse createVoyager(CreateVoyagerRequest createVoyagerRequest);
+    Voyager createVoyager(CreateVoyagerRequest createVoyagerRequest);
 
-    Voyager getVoyager(UUID id);
+    Voyager getVoyager(String id);
 
 }

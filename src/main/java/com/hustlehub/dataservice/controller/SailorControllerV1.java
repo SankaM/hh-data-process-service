@@ -21,7 +21,7 @@ public class SailorControllerV1 {
     }
 
     @GetMapping("/{id}")
-    public Sailor getSailor(@PathVariable UUID id) {
+    public Sailor getSailor(@PathVariable String id) {
         return sailorService.getSailor(id);
     }
 

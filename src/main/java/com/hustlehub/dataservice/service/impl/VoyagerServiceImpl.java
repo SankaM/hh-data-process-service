@@ -26,20 +26,23 @@ public class VoyagerServiceImpl implements VoyagerService {
 
     @Transactional
     @Override
-    public CreateVoyagerResponse createVoyager(CreateVoyagerRequest createVoyagerRequest) {
+    public Voyager createVoyager(CreateVoyagerRequest createVoyagerRequest) {
         VoyagerEntity voyagerEntity = VoyagerEntity.builder()
-                .id(UUID.randomUUID())
-                .userId(createVoyagerRequest.getUserName()).build();
+                .id(UUID.randomUUID().toString()).status(Status.INITIATED)
+                .name(createVoyagerRequest.getName())
+                .userName(createVoyagerRequest.getUserName()).build();
         voyagerEntity = voyagerRepository.save(voyagerEntity);
         log.info("Created voyager in the system");
-        return CreateVoyagerResponse.builder().userName(voyagerEntity.getUserId())
+        return Voyager.builder().userName(voyagerEntity.getUserName()).name(voyagerEntity.getName())
+                .status(voyagerEntity.getStatus())
                 .id(voyagerEntity.getId()).build();
     }
 
     @Override
-    public Voyager getVoyager(UUID id){
-        VoyagerEntity voyagerEntity =  voyagerRepository.findById(id);
-        return Voyager.builder()
-                .id(voyagerEntity.getId()).userName(voyagerEntity.getUserId()).build();
+    public Voyager getVoyager(String id){
+        VoyagerEntity voyagerEntity =  voyagerRepository.findById(id).get();
+        return Voyager.builder().userName(voyagerEntity.getUserName()).name(voyagerEntity.getName())
+                .status(voyagerEntity.getStatus())
+                .id(voyagerEntity.getId()).build();
     }
 }

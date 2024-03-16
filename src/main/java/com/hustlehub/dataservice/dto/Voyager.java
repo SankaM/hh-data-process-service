@@ -12,9 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Voyager {
-    private UUID id;
+    private String id;
     private String userName;
-    private String ticker;
-    private List<Hustle> hustles;
-    private String approvedBy;
+    private String name;
+    private String walletId;
+    private Status status;
 }

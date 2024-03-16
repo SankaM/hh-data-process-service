@@ -7,6 +7,7 @@ import com.hustlehub.dataservice.dto.Sailor;
 import com.hustlehub.dataservice.service.AdminService;
 import com.hustlehub.dataservice.service.SailorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -29,5 +30,9 @@ public class AdminControllerV1 {
         return  adminService.approveHustle(sailorId, hustleId);
     }
 
-
+    @PutMapping("/job/hustles/activate")
+    public ResponseEntity startApprovedHustleJob() {
+        adminService.startApprovedHustles();
+        return ResponseEntity.noContent().build();
+    }
 }
