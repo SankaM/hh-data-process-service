@@ -1,12 +1,9 @@
 package com.hustlehub.dataservice.controller;
 
 import com.hustlehub.dataservice.dto.*;
-import com.hustlehub.dataservice.service.SailorService;
 import com.hustlehub.dataservice.service.VoyagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/v1/voyager")
@@ -26,7 +23,12 @@ public class VoyagerControllerV1 {
         return voyagerService.getVoyager(id);
     }
 
-
+    @PostMapping("/{voyagerId}/hustle/{hustleId}/amulet")
+    public Amulet investHustle(@PathVariable("voyagerId") String voyagerId,
+                               @PathVariable("hustleId") String hustleId,
+                               @RequestBody CreateAmuletRequest createAmuletRequest) {
+        return  voyagerService.createAmulet(voyagerId, hustleId, createAmuletRequest);
+    }
 
 
 }

@@ -45,8 +45,14 @@ public class HustleEntity {
     @Column(name="CURRENCY")
     private String currency;
 
-    @Column(name="CARD_COUNT")
-    private Long cardCount;
+    @Column(name="TOTAL_CARD_COUNT")
+    private Long totalCardCount;
+
+    @Column(name="SOLD_CARD_COUNT")
+    private Long soldCardCount;
+
+    @Column(name="TOTAL_CAPITAL_RAISED")
+    private BigDecimal totalCapitalRaised;
 
     @Column(name="CARD_VALUE")
     private BigDecimal cardValue;

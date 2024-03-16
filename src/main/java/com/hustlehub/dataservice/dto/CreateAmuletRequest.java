@@ -11,9 +11,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude
-public class CreateVoyagerRequest {
+public class CreateAmuletRequest {
 
-    private String userName;
-    private String name;
-    private BigDecimal initialBalance;
+    private String hustleId;
+    private BigDecimal investedAmount;
+    private Long purchasedCardCount;
 }

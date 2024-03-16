@@ -22,8 +22,11 @@ public class Hustle {
     private String sailorId;
     private Status status;
     private BigDecimal valuation;
+    private BigDecimal totalCapitalRaised;
     private String currency;
-    private Long cardCount;
+    private Long totalCardCount;
+    private Long soldCardCount;
+    private Long unsoldCardCount;
     private BigDecimal cardValue;
     private String approvedBy;
     private LocalDateTime createdAt;
