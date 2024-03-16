@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -49,15 +50,16 @@ public class VoyagerServiceImpl implements VoyagerService {
         log.info("Created voyager in the system");
         return Voyager.builder().userName(voyagerEntity.getUserName()).name(voyagerEntity.getName())
                 .status(voyagerEntity.getStatus())
-                .id(voyagerEntity.getId()).wallet(wallet).build();
+                .id(voyagerEntity.getId()).wallets(List.of(wallet)).build();
     }
 
     @Override
     public Voyager getVoyager(String id){
         VoyagerEntity voyagerEntity =  voyagerRepository.findById(id).get();
+        List<Wallet> wallets = walletService.findWalletByVoyagerId(id);
         return Voyager.builder().userName(voyagerEntity.getUserName()).name(voyagerEntity.getName())
                 .status(voyagerEntity.getStatus())
-                .id(voyagerEntity.getId()).build();
+                .id(voyagerEntity.getId()).wallets(wallets).build();
     }
 
     @Override
@@ -69,6 +71,7 @@ public class VoyagerServiceImpl implements VoyagerService {
         hustleService.saveHustleEntity(hustleEntity);
         // create amulet
         AmuletEntity amuletEntity = AmuletEntity.builder()
+                .id(UUID.randomUUID().toString())
                 .purchasedCardCount(createAmuletRequest.getPurchasedCardCount())
                 .cardValue(hustleEntity.getCardValue())
                 .hustleId(hustleId)

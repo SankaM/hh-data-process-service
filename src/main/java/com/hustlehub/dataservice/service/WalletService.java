@@ -13,4 +13,6 @@ public interface WalletService {
     List<Deposit> loadAllDeposits();
 
     Wallet createWallet(String voyagerId, String currency, BigDecimal initialBalance);
+
+    List<Wallet> findWalletByVoyagerId(String voyagerId);
 }

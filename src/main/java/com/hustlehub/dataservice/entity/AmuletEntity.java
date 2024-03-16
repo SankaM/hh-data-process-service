@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="HUSTLES")
+@Table(name="AMULETS")
 @Getter
 @Setter
 @Builder

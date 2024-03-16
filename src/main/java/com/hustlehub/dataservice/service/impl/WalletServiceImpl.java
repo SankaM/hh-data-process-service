@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,19 +55,32 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public Wallet createWallet(String voyagerId, String currency, BigDecimal initialBalance ){
-        WalletEntity walletEntity  = walletRepository.save(WalletEntity.builder()
+    public List<Wallet> findWalletByVoyagerId(String voyagerId) {
+        List<WalletEntity> walletEntities =  walletRepository.findWalletByVoyagerId(voyagerId);
+        List<Wallet> wallets = new ArrayList<>();
+        for(WalletEntity walletEntity: walletEntities){
+            wallets.add(getWallet(walletEntity));
+        }
+        return wallets;
+    }
+
+    @Override
+    public Wallet createWallet(String voyagerId, String currency, BigDecimal initialBalance ) {
+        WalletEntity walletEntity = walletRepository.save(WalletEntity.builder()
                 .balance(initialBalance)
                 .id(UUID.randomUUID().toString())
-                .status(initialBalance.compareTo(BigDecimal.ZERO)>0?Status.ACTIVE:Status.INACTIVE)
+                .status(initialBalance.compareTo(BigDecimal.ZERO) > 0 ? Status.ACTIVE : Status.INACTIVE)
                 .voyagerId(voyagerId)
                 .currency(currency)
                 .build());
+        return getWallet(walletEntity);
+    }
+
+    private Wallet getWallet(WalletEntity walletEntity){
         return Wallet.builder().walletId(walletEntity.getId()).balance(walletEntity.getBalance())
                 .currency(walletEntity.getCurrency())
                 .status(walletEntity.getStatus())
                 .voyagerId(walletEntity.getVoyagerId()).build();
-
     }
 
     private void validateDepositRequest(DepositRequest depositRequest) {

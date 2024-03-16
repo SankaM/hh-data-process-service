@@ -16,5 +16,5 @@ public class Voyager {
     private String userName;
     private String name;
     private Status status;
-    private Wallet wallet;
+    private List<Wallet> wallets;
 }
