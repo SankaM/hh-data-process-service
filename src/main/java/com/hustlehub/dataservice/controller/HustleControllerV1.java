@@ -16,8 +16,6 @@ public class HustleControllerV1 {
     @Autowired
     private HustleService hustleService;
 
-
-
     @GetMapping("/{id}")
     public Hustle getHustle(@PathVariable String id) {
         return hustleService.getHustle(id);

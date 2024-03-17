@@ -29,6 +29,8 @@ public class AmuletEntity {
     private String voyagerId;
     @Column(name="HUSTLE_ID", nullable = false)
     private String hustleId;
+    @Column(name="WALLET_ID", nullable = false)
+    private String walletId;
     @Column(name="INVESTED_AMOUNT", nullable = false)
     private BigDecimal investedAmount;
     @Column(name="PURCHASED_CARD_COUNT", nullable = false)
@@ -47,6 +49,8 @@ public class AmuletEntity {
     private BigDecimal currentTotalReturnReceived;
     @Column(name="TOTAL_RETURN_EXPECTED", nullable = false)
     private BigDecimal totalReturnExpected;
+    @Column(name="TOTAL_RETURN_PER_CARD", nullable = false)
+    private BigDecimal totalReturnPerCard;
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=20, nullable=false)
     private Status status;

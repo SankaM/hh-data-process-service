@@ -23,6 +23,7 @@ public class Hustle {
     private Status status;
     private BigDecimal valuation;
     private BigDecimal totalCapitalRaised;
+    private BigDecimal totalReturnBalance;
     private String currency;
     private Long totalCardCount;
     private Long soldCardCount;

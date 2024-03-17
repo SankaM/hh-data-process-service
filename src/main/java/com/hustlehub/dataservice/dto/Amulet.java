@@ -11,14 +11,16 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Amulet {
 
     private String voyagerId;
     private String hustleId;
+    private String walletId;
     private BigDecimal investedAmount;
     private Long purchasedCardCount;
     private BigDecimal cardValue;
+    private BigDecimal totalReturnPerCard;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime nextReturnDate;

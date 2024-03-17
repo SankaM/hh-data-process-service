@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @JsonInclude
 public class CreateAmuletRequest {
 
-    private String hustleId;
     private BigDecimal investedAmount;
     private Long purchasedCardCount;
+    private String walletId;
 }

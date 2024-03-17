@@ -42,6 +42,9 @@ public class HustleEntity {
     @Column(name="VALUATION")
     private BigDecimal valuation;
 
+    @Column(name="TOTAL_RETURN_BALANCE")
+    private BigDecimal totalReturnBalance;
+
     @Column(name="CURRENCY")
     private String currency;
 

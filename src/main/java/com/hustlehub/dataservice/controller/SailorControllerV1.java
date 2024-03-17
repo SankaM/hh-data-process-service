@@ -30,4 +30,10 @@ public class SailorControllerV1 {
         return  sailorService.createHustle(sailorId, createHustleRequest);
     }
 
+    @GetMapping("/{id}/hustles")
+    public Sailor getSailorHustles(@PathVariable String id) {
+        return sailorService.getSailor(id);
+    }
+
+
 }

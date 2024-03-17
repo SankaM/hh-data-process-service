@@ -65,6 +65,11 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
+    public  WalletEntity getWalletEntityByWalletId(String walletId){
+        return walletRepository.findById(walletId).get();
+    }
+
+    @Override
     public Wallet createWallet(String voyagerId, String currency, BigDecimal initialBalance ) {
         WalletEntity walletEntity = walletRepository.save(WalletEntity.builder()
                 .balance(initialBalance)
@@ -74,6 +79,11 @@ public class WalletServiceImpl implements WalletService {
                 .currency(currency)
                 .build());
         return getWallet(walletEntity);
+    }
+
+    @Override
+    public WalletEntity updateWallet(WalletEntity walletEntity){
+        return walletRepository.save(walletEntity);
     }
 
     private Wallet getWallet(WalletEntity walletEntity){

@@ -3,6 +3,7 @@ package com.hustlehub.dataservice.service;
 import com.hustlehub.dataservice.dto.Deposit;
 import com.hustlehub.dataservice.dto.DepositRequest;
 import com.hustlehub.dataservice.dto.Wallet;
+import com.hustlehub.dataservice.entity.WalletEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,4 +16,8 @@ public interface WalletService {
     Wallet createWallet(String voyagerId, String currency, BigDecimal initialBalance);
 
     List<Wallet> findWalletByVoyagerId(String voyagerId);
+
+    WalletEntity getWalletEntityByWalletId(String walletId);
+
+    WalletEntity updateWallet(WalletEntity walletEntity);
 }

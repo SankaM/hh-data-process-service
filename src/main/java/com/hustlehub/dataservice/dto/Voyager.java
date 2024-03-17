@@ -17,4 +17,5 @@ public class Voyager {
     private String name;
     private Status status;
     private List<Wallet> wallets;
+    private List<Amulet> amulets;
 }
