@@ -1,7 +1,6 @@
 package com.hustlehub.dataservice.service.impl;
 
 import com.hustlehub.dataservice.dto.*;
-import com.hustlehub.dataservice.entity.HustleEntity;
 import com.hustlehub.dataservice.entity.SailorEntity;
 import com.hustlehub.dataservice.repository.SailorRepository;
 import com.hustlehub.dataservice.service.HustleService;
@@ -12,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -65,5 +65,10 @@ public class SailorServiceImpl implements SailorService {
         }else{
             throw new RuntimeException("SailorNotFound");
         }
+    }
+
+    @Override
+    public List<Hustle> listSailorHustles(String sailorId) {
+        return hustleService.getAllHustlesForSailor(sailorId);
     }
 }

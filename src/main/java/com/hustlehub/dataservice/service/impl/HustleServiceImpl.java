@@ -9,11 +9,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.hustlehub.dataservice.util.ApplicationConstant.HUSTLE_STATUS_ACTIVE;
 
 
 @Service
@@ -100,5 +105,14 @@ public class HustleServiceImpl implements HustleService {
 
         hustle.setUnsoldCardCount(hustle.getTotalCardCount() - hustle.getSoldCardCount());
         return hustle;
+    }
+
+    @Override
+    public List<Hustle> getAllHustlesForSailor(String sailorId) {
+        List<HustleEntity> hustleEntities =  hustleRepository.findBySailorId(sailorId);
+        if (CollectionUtils.isEmpty(hustleEntities)) {
+            return Collections.emptyList();
+        }
+        return hustleEntities.stream().map(this::getHustle).collect(Collectors.toList());
     }
 }
