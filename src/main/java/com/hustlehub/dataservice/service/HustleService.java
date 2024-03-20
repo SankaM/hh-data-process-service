@@ -4,7 +4,6 @@ import com.hustlehub.dataservice.dto.*;
 import com.hustlehub.dataservice.entity.HustleEntity;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface HustleService {
 
@@ -18,4 +17,5 @@ public interface HustleService {
 
     List<Hustle> getActiveHustles();
 
+    List<Hustle> getAllHustlesForSailor(String sailorId);
 }

@@ -5,6 +5,7 @@ import com.hustlehub.dataservice.service.SailorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -31,8 +32,8 @@ public class SailorControllerV1 {
     }
 
     @GetMapping("/{id}/hustles")
-    public Sailor getSailorHustles(@PathVariable String id) {
-        return sailorService.getSailor(id);
+    public List<Hustle> listSailorHustles(@PathVariable String id) {
+        return sailorService.listSailorHustles(id);
     }
 
 
