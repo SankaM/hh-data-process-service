@@ -1,11 +1,13 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.3'
+	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'com.palantir.docker' version '0.35.0'
+	id 'com.palantir.docker-run' version '0.35.0'
 }
 
 group = 'com.mci'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
 	sourceCompatibility = '17'
@@ -33,4 +35,33 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('bootJar') {
+	launchScript()
+}
+
+jar {
+	archiveFileName = 'data-process-service.jar'
+	manifest {
+		attributes(
+				'Main-Class': 'com.hustlehub.dataservice.DataServiceApplication'
+		)
+	}
+}
+
+docker {
+	name "${project.name}:${project.version}"
+	dockerfile file('docker/Dockerfile')
+	copySpec.from(jar).rename('.*', "data-process-service-0.0.1.jar")
+	buildArgs(['JAR_FILE':"data-process-service-0.0.1.jar"])
+	files 'data-process-service-0.0.1.jar'
+	tag 'DockerHub', "kasunsk/hustlehub:${project.version}"
+}
+
+dockerRun {
+	name "${project.name}"
+	image "${project.name}:${project.version}"
+	ports '8282:8282'
+	clean true
 }
