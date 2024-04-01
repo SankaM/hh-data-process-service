@@ -30,5 +30,10 @@ public class VoyagerControllerV1 {
         return  voyagerService.createAmulet(voyagerId, hustleId, createAmuletRequest);
     }
 
+    @GetMapping("/{id}/summary")
+    public HustleSummary getHustleSummary(@PathVariable String id) {
+        return voyagerService.getHustleSummary(id);
+    }
+
 
 }
