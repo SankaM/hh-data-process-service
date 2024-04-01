@@ -10,4 +10,5 @@ public interface VoyagerService {
 
     Amulet createAmulet(String voyagerId, String hustleId, CreateAmuletRequest createAmuletRequest);
 
+    HustleSummary getHustleSummary(String id);
 }

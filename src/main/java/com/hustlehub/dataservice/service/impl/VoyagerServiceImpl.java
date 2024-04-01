@@ -17,6 +17,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.hustlehub.dataservice.util.ApplicationConstant.*;
 
 
 @Service
@@ -94,12 +97,59 @@ public class VoyagerServiceImpl implements VoyagerService {
                 .nextReturnAmount(hustleEntity.getReturnValue().multiply(new BigDecimal(createAmuletRequest.getPurchasedCardCount())))
                 .investedAmount(createAmuletRequest.getInvestedAmount())
                 .currentTotalReturnReceived(BigDecimal.ZERO)
+                .totalAmountWithdrawn(BigDecimal.ZERO)
                 .status(Status.INITIATED)
                 .totalReturnExpected(
                         hustleEntity.getTotalReturnPerCard().multiply(new BigDecimal(createAmuletRequest.getPurchasedCardCount())))
                 .build();
         amuletEntity = amuletRepository.save(amuletEntity);
         return buildAmuletDto(amuletEntity);
+    }
+
+    @Override
+    public HustleSummary getHustleSummary(String id) {
+        List<AmuletEntity> amuletEntities = amuletRepository.findByVoyagerId(id);
+        List<AmuletSummary> amuletSummaries = amuletEntities.stream().map(this::buildAmuletSummaryDto).collect(Collectors.toList());
+        int totalAmulets = amuletEntities.size();
+        BigDecimal totalInvestmentsInAmulets = getTotalValueByOperation(amuletEntities, TOTAL_INVESTMENT);
+        BigDecimal totalReturnsToDate = getTotalValueByOperation(amuletEntities, TOTAL_RETURN);
+        BigDecimal totalWithdrawal = getTotalValueByOperation(amuletEntities, TOTAL_WITHDRAWAL);
+        BigDecimal amountEligibleToWithdraw = getTotalEligibleAmountToWithdraw(amuletSummaries);;
+        HustleSummary hustleSummary = HustleSummary.builder()
+                .amulets(amuletSummaries)
+                .totalInvestmentsInAmulets(totalInvestmentsInAmulets)
+                .totalReturnsToDate(totalReturnsToDate)
+                .totalWithdrawal(totalWithdrawal)
+                .totalAmountEligibleToWithdraw(amountEligibleToWithdraw)
+                .totalAmulets(totalAmulets)
+                .build();
+        return hustleSummary;
+    }
+
+    private BigDecimal getTotalEligibleAmountToWithdraw(List<AmuletSummary> amuletSummaries) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (AmuletSummary amuletSummary : amuletSummaries) {
+            total.add(amuletSummary.getAmountEligibleToWithdraw());
+        }
+        return total;
+    }
+
+    private BigDecimal getTotalValueByOperation(List<AmuletEntity> amuletEntities, String operation) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (AmuletEntity amuletEntity : amuletEntities) {
+            switch (operation)  {
+                case TOTAL_RETURN:
+                    total = total.add(amuletEntity.getCurrentTotalReturnReceived());
+                    break;
+                case TOTAL_INVESTMENT:
+                    total = total.add(amuletEntity.getInvestedAmount());
+                    break;
+                case TOTAL_WITHDRAWAL:
+                    total = total.add(amuletEntity.getTotalAmountWithdrawn());
+                    break;
+            }
+        }
+        return total;
     }
 
     private Amulet buildAmuletDto(AmuletEntity amuletEntity){
@@ -122,6 +172,20 @@ public class VoyagerServiceImpl implements VoyagerService {
         BigDecimal returnPercentage  = amuletEntity.getTotalReturnExpected().divide(amuletEntity.getInvestedAmount()).multiply(new BigDecimal("100"));
         amulet.setTotalReturnPercentage(returnPercentage + "%");
         return amulet;
+    }
+
+    private AmuletSummary buildAmuletSummaryDto(AmuletEntity amuletEntity){
+        AmuletSummary amuletSummary = AmuletSummary.builder()
+                .amuletId(amuletEntity.getId())
+                .investedAmount(amuletEntity.getInvestedAmount())
+                .currentTotalReturnReceived(amuletEntity.getCurrentTotalReturnReceived())
+                .totalReturnExpected(amuletEntity.getTotalReturnExpected())
+                .build();
+        Hustle hustle = hustleService.getHustle(amuletEntity.getHustleId());
+        amuletSummary.setName(hustle.getName());
+        BigDecimal amountEligibleToWithdraw = amuletEntity.getCurrentTotalReturnReceived().subtract(amuletEntity.getTotalAmountWithdrawn());
+        amuletSummary.setAmountEligibleToWithdraw(amountEligibleToWithdraw);
+        return amuletSummary;
     }
 
     private List<Amulet> getAmuletOfVoyager(String voyagerId){

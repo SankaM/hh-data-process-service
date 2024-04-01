@@ -27,30 +27,47 @@ public class AmuletEntity {
 
     @Column(name="VOYAGER_ID", nullable = false)
     private String voyagerId;
+
     @Column(name="HUSTLE_ID", nullable = false)
     private String hustleId;
+
     @Column(name="WALLET_ID", nullable = false)
     private String walletId;
+
     @Column(name="INVESTED_AMOUNT", nullable = false)
     private BigDecimal investedAmount;
+
     @Column(name="PURCHASED_CARD_COUNT", nullable = false)
     private Long purchasedCardCount;
+
     @Column(name="PER_CARD_VALUE", nullable = false)
     private BigDecimal cardValue;
+
     @Column(name="START_DATE")
     private LocalDateTime startDate;
+
     @Column(name="END_DATE")
     private LocalDateTime endDate;
+
     @Column(name="NEXT_RETURN_DATE")
     private LocalDateTime nextReturnDate;
+
     @Column(name="NEXT_RETURN_AMOUNT")
     private BigDecimal nextReturnAmount;
+
     @Column(name="CURRENT_TOTAL_RETURN")
     private BigDecimal currentTotalReturnReceived;
+
     @Column(name="TOTAL_RETURN_EXPECTED", nullable = false)
     private BigDecimal totalReturnExpected;
+
     @Column(name="TOTAL_RETURN_PER_CARD", nullable = false)
     private BigDecimal totalReturnPerCard;
+
+    // columnDefinition = "Decimal(10,2) default '0.00'"
+    @Column(name="TOTAL_AMOUNT_WITHDRAWN")
+    private BigDecimal totalAmountWithdrawn;
+
     @Enumerated(EnumType.STRING)
     @Column(name="STATUS", length=20, nullable=false)
     private Status status;
