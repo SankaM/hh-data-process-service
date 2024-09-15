@@ -32,7 +32,7 @@ class WalletControllerV1Test {
     @Test
     void testSaveDeposit() {
         DepositRequest depositRequest = new DepositRequest();
-        doNothing().when(walletService).createDeposit(depositRequest);
+        when(walletService.createDeposit(depositRequest)).thenReturn(true);
 
         walletControllerV1.saveDeposit(depositRequest);
 
@@ -46,7 +46,7 @@ class WalletControllerV1Test {
 
         DepositResponse response = walletControllerV1.viewDeposits();
 
-//        assertEquals(depositList, response.getDeposits());
+        assertEquals(depositList, response.getDeposits());
         verify(walletService, times(1)).loadAllDeposits();
     }
 }
